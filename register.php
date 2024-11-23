@@ -3,6 +3,8 @@
 session_start();
     include("connection.php");
     include("functions.php");
+    
+
 
     if($_SERVER ['REQUEST_METHOD']=="POST")
     {
@@ -23,21 +25,21 @@ session_start();
         && ! empty($password) 
         &&!is_numeric($first_name)
         && !is_numeric($last_name)
-        && filter_var($email,!FILTER_VALIDATE_EMAIL)
+        && filter_var($email,FILTER_VALIDATE_EMAIL)
         &&  preg_match('/^[0-9]{10,15}$/', $contactno) )
     {
 
         $user_id=random_num(10);
-        $query="insert into user_registration(user_id,first_name,last_name,username,email,contactno,address,password) 
-        values('$user_id','$first_name','$last_name','$username','$email','$ntactnoco','$address','$password')";
+        $query="insert into registration(user_id,first_name,last_name,username,email,contactno,address,password) 
+        values('$user_id','$first_name','$last_name','$username','$email','$contactno','$address','$password')";
 
-        mysqli_query($query);
-        header("Location: login.php");
+        mysqli_query($con,$query);
+        header("Location:login.php");
         die;
 
     }
     else{
-        echo"Plese enter valid information";
+        $error_message="Plese enter valid information";
     }
 
 }
@@ -81,7 +83,17 @@ session_start();
 
             <button type="submit">Register</button>
         </form>
-        <p>Already have an account? <a href="login.html">Login</a></p>
+        <?php 
+            if (!empty($error_message)) {
+            echo '<div class="error_message">' . htmlspecialchars($error_message) . '</div>';
+            }
+?>
+
+         
+
+
+        <p>Already have an account? <a href="login.php">Login</a></p>
+
     </div>
 </body>
 </html>

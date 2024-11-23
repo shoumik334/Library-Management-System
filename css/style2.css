@@ -62,8 +62,14 @@ main {
 
 h2 {
     text-align: center;
-    
+   
     margin-bottom: 30px;
+}
+h3{
+    color: #000000;
+}
+p{
+    color: #000000;
 }
 
 /* Stats Section */
@@ -135,7 +141,6 @@ footer {
     }
 }
 
-/* Background Image Example */
 body {
     background-image: url('images/library.jpg');
     background-repeat: no-repeat;
@@ -150,11 +155,11 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     color: #fff;
-    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
-    cursor: pointer; /* Indicate interactivity */
+    transition: transform 0.3s, box-shadow 0.3s; 
+    cursor: pointer; 
 }
 
 .stat:hover, .stat2:hover {
-    transform: scale(1.1); /* Zoom in slightly */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow */
+    transform: scale(1.1); 
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); 
 }

@@ -1,5 +1,5 @@
 
-<!-- <?php
+<?php
 session_start();
 
 if (!isset($_SESSION['login_id'])) {
@@ -9,7 +9,7 @@ if (!isset($_SESSION['login_id'])) {
 
 echo "<h2>Welcome, Login ID: " . $_SESSION['login_id'] . "</h2>";
 echo '<a href="logout.php">Logout</a>';
-?> -->
+?>
 
 
 

@@ -77,8 +77,8 @@ if (!$result) {
             </tbody>
         </table>
 
-        <!-- Button to go back -->
-        <a href="home.php" class="btn btn-primary w-100">Back</a>
+        <!-- Button to go back
+        <a href="home.php" class="btn btn-primary w-100">Back</a> -->
     </div>
     </main>
 </body>

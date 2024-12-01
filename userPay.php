@@ -82,13 +82,55 @@ if (!mysqli_stmt_execute($stmt_fines)) {
 
 $result_fines = mysqli_stmt_get_result($stmt_fines);
 
-echo "<h1>Your Fines</h1>";
-while ($row = mysqli_fetch_assoc($result_fines)) {
-    echo "Book ISBN: " . $row['ISBN'] . " - Fine: " . $row['fine'] . "<br>";
-}
 
 // Close all prepared statements and database connection
 mysqli_stmt_close($stmt);
 mysqli_stmt_close($stmt_fines);
 mysqli_close($conn);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Payment</h1>
+
+        <!-- Table to display the users -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    
+                    <th>Book ID</th>
+                    <th>Fine</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Loop through each row and display the data
+                $counter = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $counter . "</td>";
+                    
+                    echo "<td>" . htmlspecialchars($row['Book_ID']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Fine']) . "</td>";
+                    echo "<td><a href='finePay.php?Book_ID=" . urlencode($row['Book_ID']) . "' class='btn btn-danger'>Pay</a></td>";
+                    echo "</tr>";
+                    $counter++;
+                }
+                ?>
+            </tbody>
+        </table>
+        <a href="home.php" class="btn btn-primary
+        w-100">back</a>
+    </div>
+
+</body>
+</html>

@@ -88,7 +88,7 @@ $totalCategories = $rowCategories['totalCategories'];
             <div class="stat2">
                 <img src="./images/fine.png" alt="">
                 <h3>Fine per day</h3>
-                <p>500</p>
+                <p>100</p>
             </div>
         </div>
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 04:35 AM
+-- Generation Time: Dec 01, 2024 at 04:45 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,8 +41,14 @@ INSERT INTO `authentication_system` (`Login_ID`, `Password`) VALUES
 ('emdavis101', 'password101'),
 ('janesmith456', 'password456'),
 ('johndoe123', 'password123'),
+('max', 'password40'),
 ('mj789', 'password789'),
-('ohernandez999', 'password999');
+('ohernandez999', 'password999'),
+('shoumik70', 'password60'),
+('sum30', '30'),
+('sum40', 'passwhat'),
+('toki', 'passwhy'),
+('toki2', 'password80');
 
 -- --------------------------------------------------------
 
@@ -67,8 +73,7 @@ CREATE TABLE `books` (
 INSERT INTO `books` (`ISBN`, `Title`, `Category`, `Price`, `Edition`, `Author`, `Publisher_ID`) VALUES
 ('ISBN123', 'Book Title 1', 'Fiction', 19.99, 1, 'Author 1', 1),
 ('ISBN456', 'Book Title 2', 'Non-Fiction', 24.99, 2, 'Author 2', 2),
-('ISBN888', 'Book Title 29', 'Science Fiction', 14.99, 3, 'Author 29', 29),
-('ISBN999', 'Book Title 30', 'Fantasy', 17.99, 4, 'Author 30', 30);
+('ISBN478', 'Title3', 'Fantasy', 15.99, 4, 'Author23', 0);
 
 -- --------------------------------------------------------
 
@@ -109,19 +114,15 @@ CREATE TABLE `readers` (
   `Login_ID` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `reports`
+-- Dumping data for table `readers`
 --
 
-CREATE TABLE `reports` (
-  `Report_ID` int(11) NOT NULL,
-  `Book_ID` varchar(20) DEFAULT NULL,
-  `User_ID` int(11) DEFAULT NULL,
-  `ISBN` varchar(20) DEFAULT NULL,
-  `Issue_Date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `readers` (`User_ID`, `FirstName`, `LastName`, `Email`, `Address`, `ContactNo`, `Login_ID`) VALUES
+(4, 'Sumyea', 'Choudhury', 'sumyeachoudhury@gmail.com', 'Dhaka', '01323273386', 'sum30'),
+(5, 'Farhat ', 'lamisa', 'farhat.lamisa@gmail.com', 'Dhaka', '01712145578', 'lamisa30'),
+(7, 'toki', 'marzia', 'tokichoudhury@gmail.com', 'Dhaka', '01712145578', 'toki'),
+(9, 'shoumik', 'islam', 'shoumik@gmail.com', 'Dhaka', '01712453318', 'shoumik70');
 
 -- --------------------------------------------------------
 
@@ -135,8 +136,23 @@ CREATE TABLE `reserve` (
   `ReserveDate` date DEFAULT NULL,
   `DueDate` date DEFAULT NULL,
   `ReturnDate` date DEFAULT NULL,
-  `User_ID` int(11) DEFAULT NULL
+  `User_ID` int(11) DEFAULT NULL,
+  `fine` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reserve`
+--
+
+INSERT INTO `reserve` (`Reserve_ID`, `Book_ID`, `ReserveDate`, `DueDate`, `ReturnDate`, `User_ID`, `fine`) VALUES
+(14, 'ISBN478', '2024-12-01', '2024-12-15', NULL, 0, 0.00),
+(15, 'ISBN456', '2024-12-01', '2024-12-15', NULL, 0, 0.00),
+(16, 'ISBN123', '2024-12-01', '2024-12-15', NULL, 0, 0.00),
+(17, 'ISBN123', '2024-12-01', '2024-12-15', NULL, NULL, 0.00),
+(18, 'ISBN123', '2024-12-01', '2024-12-15', NULL, NULL, 0.00),
+(19, 'ISBN123', '2024-12-01', '2024-12-15', NULL, NULL, 0.00),
+(20, 'ISBN123', '2024-12-01', '2024-12-15', NULL, 0, 0.00),
+(21, 'ISBN456', '2024-12-01', '2024-12-15', NULL, 0, 0.00);
 
 -- --------------------------------------------------------
 
@@ -198,14 +214,6 @@ ALTER TABLE `readers`
   ADD UNIQUE KEY `Login_ID` (`Login_ID`);
 
 --
--- Indexes for table `reports`
---
-ALTER TABLE `reports`
-  ADD PRIMARY KEY (`Report_ID`),
-  ADD KEY `Book_ID` (`Book_ID`),
-  ADD KEY `User_ID` (`User_ID`);
-
---
 -- Indexes for table `reserve`
 --
 ALTER TABLE `reserve`
@@ -233,19 +241,13 @@ ALTER TABLE `publisher`
 -- AUTO_INCREMENT for table `readers`
 --
 ALTER TABLE `readers`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `reports`
---
-ALTER TABLE `reports`
-  MODIFY `Report_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `reserve`
 --
 ALTER TABLE `reserve`
-  MODIFY `Reserve_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Reserve_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `staff`
@@ -264,18 +266,10 @@ ALTER TABLE `email`
   ADD CONSTRAINT `email_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `readers` (`User_ID`);
 
 --
--- Constraints for table `reports`
---
-ALTER TABLE `reports`
-  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`Book_ID`) REFERENCES `books` (`ISBN`),
-  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`User_ID`) REFERENCES `readers` (`User_ID`);
-
---
 -- Constraints for table `reserve`
 --
 ALTER TABLE `reserve`
-  ADD CONSTRAINT `reserve_ibfk_1` FOREIGN KEY (`Book_ID`) REFERENCES `books` (`ISBN`),
-  ADD CONSTRAINT `reserve_ibfk_2` FOREIGN KEY (`User_ID`) REFERENCES `readers` (`User_ID`);
+  ADD CONSTRAINT `reserve_ibfk_1` FOREIGN KEY (`Book_ID`) REFERENCES `books` (`ISBN`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

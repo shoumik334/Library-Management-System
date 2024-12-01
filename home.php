@@ -10,7 +10,7 @@ if(!isset($_SESSION['Login_ID'])){
 <html>
 <head>
     <title>Library Management System Dashboard</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 <body>
     <header>
@@ -19,10 +19,10 @@ if(!isset($_SESSION['Login_ID'])){
             <ul>
                 <li><a href="booksMain.php">Books</a></li>
                 <li><a href="user.php">Members</a></li>
-                <li><a href="#">Reports</a></li>
+                <li><a href="userPay.php">Reports</a></li>
                 <li><a href="publMain.php">Publications</a></li>
                 <li><a href="addUser.php">Update profile</a></li>
-                
+                <li><a href="changePass.php">Change password</a></li>
                 <li><a href="logout.php">Log out</a></li>
             </ul>
         </nav>
@@ -49,7 +49,7 @@ if(!isset($_SESSION['Login_ID'])){
                 <p>300</p>
             </div>
         </div>
-        <class="stats2">
+        <div class="stats2">
             <div class="stat2">
             
                 <img src="./images/pub.png" alt="">
@@ -66,7 +66,8 @@ if(!isset($_SESSION['Login_ID'])){
                 <h3>Fine per day</h3>
                 <p>500</p>
             </div>
-</div>
+        </div>
+
         </main>
 </body>
 </html>
